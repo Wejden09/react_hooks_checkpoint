@@ -1,22 +1,23 @@
 import React from 'react'
 import MovieCard from './MovieCard'
+import { Link } from 'react-router-dom'
 
-function MovieList({ movies }) {
-    if (movies.length === 0) {
-        return (
-            <div className="flex flex-col items-center justify-center min-h-[40vh] bg-gray-50 rounded-xl shadow-md p-8 m-8">
-                <p className="text-gray-500 text-xl font-semibold">No movies found</p>
-            </div>
-        );
+function MovieList({movies}) {
+    if(movies.length === 0){
+        return <div className="text-center p-8 text-gray-500 text-lg">
+            <p>No movies found</p>
+        </div>
     }
 
-    return (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 p-6 bg-gray-50 rounded-xl shadow-md mx-4 my-8">
-            {movies.map((m) => (
-                <MovieCard key={m.id} movie={m} />
-            ))}
-        </div>
-    );
+  return (
+    <div className="flex flex-wrap justify-center gap-6 p-4">
+        {movies.map(m =>(
+            <Link key={m.id} to={`/movie/${m.id}`}>
+                <MovieCard movie={m}/>
+            </Link>
+        ))}
+    </div>
+  )
 }
 
 export default MovieList
